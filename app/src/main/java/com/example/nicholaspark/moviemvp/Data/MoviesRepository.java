@@ -32,7 +32,7 @@ public class MoviesRepository implements MovieDataSource{
 
     @Override
     public void getMovies(Map<String, String> params, @NonNull LoadMoviesCallback callback) {
-
+        remoteDataSource.getMovies(params,callback);
     }
 
     @Override

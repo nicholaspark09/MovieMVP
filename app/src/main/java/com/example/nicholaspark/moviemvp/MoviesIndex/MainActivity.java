@@ -1,5 +1,6 @@
-package com.example.nicholaspark.moviemvp;
+package com.example.nicholaspark.moviemvp.MoviesIndex;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,10 +15,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import com.example.nicholaspark.moviemvp.MovieMVP;
+import com.example.nicholaspark.moviemvp.R;
+
+import javax.inject.Inject;
+
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, MoviesIndexFragment.OnFragmentInteractionListener {
 
-
+    @Inject
+    MoviesPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +33,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,6 +42,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Fragment is the view
+        MoviesIndexFragment fragment = MoviesIndexFragment.newInstance("","");
+
+        
+        DaggerMoviesComponent.builder()
+                .moviesRepositoryComponent(((MovieMVP) getApplication()).getmMoviesRepositoryComponent())
+                .moviesPresenterModule(new MoviesPresenterModule(fragment))
+                .build()
+                .inject(this);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.frameLayout,fragment,"MoviesIndex").commit();
     }
 
     @Override
@@ -94,5 +111,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

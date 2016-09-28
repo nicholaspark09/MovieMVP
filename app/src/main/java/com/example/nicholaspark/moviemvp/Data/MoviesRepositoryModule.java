@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.example.nicholaspark.moviemvp.Data.Local.Local;
 import com.example.nicholaspark.moviemvp.Data.Local.MovieLocalDataSource;
-import com.example.nicholaspark.moviemvp.Data.MovieDataSource;
 import com.example.nicholaspark.moviemvp.Data.Remote.MovieRemoteDataSource;
 import com.example.nicholaspark.moviemvp.Data.Remote.Remote;
 

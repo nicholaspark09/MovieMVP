@@ -1,4 +1,4 @@
-package com.example.nicholaspark.moviemvp.Views;
+package com.example.nicholaspark.moviemvp.MoviesIndex;
 
 import android.content.Context;
 import android.content.Intent;
@@ -76,6 +76,7 @@ public class MoviesIndexFragment extends Fragment implements MoviesContract.View
             }
         });
 
+
         return view;
     }
 
@@ -143,7 +144,7 @@ public class MoviesIndexFragment extends Fragment implements MoviesContract.View
 
     @Override
     public void setPresenter(MoviesContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 
 
